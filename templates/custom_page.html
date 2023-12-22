@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title_extra %}
+    - {{ page.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="p-4">
+        <!-- <p class="text-bold">{{ page.title }}</p> -->
+        {{ page.content | safe | linebreaks }}
+    </div>
+{% endblock %}

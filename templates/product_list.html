@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title_extra %}
+    - {{ category.title }}
+{% endblock %}
+
+{% block content %}
+    <div>
+        <ul class="flex flex-wrap justify-start">
+            {% for c in categories %}
+                <li class="border m-1"><a href="{% url 'product_list' c.id %}" class="p-2 block bg-gray-100 text-gray-500">{{ c.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="p-2 flex flex-col">
+        <p class="text-bold text-center py-3">{{ category.title }}</p>
+        <ul class="flex flex-row justify-around flex-wrap">
+            {% for p in category.get_visible_products %}
+                <li class="overflow-hidden shadow-lg lg:w-3/10 lg:h-[500px] lg:mx-1 my-3">
+                    <a href="{% url 'product' p.id %}">
+                        <img src="/{{ p.main_img }}" alt="{{ p.title }}" class="w-full h-3/4 object-contain lg:shadow-lg">
+                        <div class="p-3 lg:pt-10">
+                            <h3 class="mb-2">{{ p.title }}</h3>
+                            <p class="text-red-500">
+                                <span class="">￥{{ p.price }}</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

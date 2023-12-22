@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            柑之饴
+            {% block title_extra %}
+            {% endblock %}
+        {% endblock %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block header %}
+        <script src="https://cdn.tailwindcss.com"></script>
+        {% block header_extra %}
+        {% endblock %}
+    {% endblock %}
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <header class="shadow">
+            <nav class="bg-gray-50 p-5">
+                <div class="container mx-auto flex items-center justify-between">
+                    <!-- Logo or Brand -->
+                    <div class="w-28">
+                        <img src="{% static '110.png' %}" alt="LOGO" class="object-contain">
+                    </div>
+                    <!-- Navigation Links -->
+                    <div class="hidden lg:flex justify-end pr-5">
+                        <a href="{% url 'index' %}" class="block h-5- mx-5 hover:text-gray-400 hover:bg-gray-50">首页</a>
+                        {% for m in menu_list %}
+                            <a href="{% url 'menu' m.id %}" class="block h-50 mx-5 hover:text-gray-400 hover:bg-gray-50">{{ m.title }}</a>
+                        {% endfor %}
+                    </div>
+                    <!-- Mobile Menu Icon -->
+                    <div class="lg:hidden">
+                        <button id="mobile-menu-button" class="border rounded-md text-gray-700 p-2 focus:outline-none">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- Mobile Menu (Hidden by default) -->
+                <div id="mobile-menu" class="hidden lg:hidden mt-2 p-1 text-gray-500">
+                    <a href="{% url 'index' %}" class="block p-5 border-b">首页</a>
+                    {% for m in menu_list %}
+                        <a href="{% url 'menu' m.id %}" class="block p-5 border-b">{{ m.title }}</a>
+                    {% endfor %}
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto flex-1 flex flex-col">
+            {% block main_content %}
+                {% if not hidden_banner %}
+                <div id="swiper" class="w-full lg:h-[480px] overflow-hidden">
+                    <img src="http://image.rechatun.com/testing/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201030132146.jpg" width="100%" height="280px" alt="banner">
+                </div>
+                {% endif %}
+
+                <div class="flex lg:flex-row flex-col">
+                    <!-- Aside (Left) -->
+                    <aside class="hidden lg:flex lg:w-1/6 p-2">
+                        Aside Content
+                    </aside>
+                    <!-- Article (Right) -->
+                    <article class="lg:flex-1 bg-white p-4">
+                        <div class="">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </article>
+                </div>
+            {% endblock %}
+        </main>
+    </div>
+    {% include 'footer.html' %}
+    <script>
+        // Toggle mobile menu visibility
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
