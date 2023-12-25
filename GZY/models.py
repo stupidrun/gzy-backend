@@ -10,6 +10,58 @@ def product_detail_image_path_and_filename(instance, filename):
     return f'static/upload/{instance.product.title}/details/{get_random_string(length=3)}_{filename}'
 
 
+class ArticleCategory(models.Model):
+    title = models.CharField(verbose_name='Title', max_length=200)
+
+    def __str__(self):
+        return self.title
+
+
+class Article(models.Model):
+    category = models.ForeignKey(
+        ArticleCategory,
+        on_delete=models.PROTECT,
+        verbose_name='Category',
+    )
+    title = models.CharField(verbose_name='Title', max_length=200)
+    content = models.TextField(verbose_name='Content')
+    visible = models.BooleanField(verbose_name='Visible', default=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = (
+            '-created_at',
+            '-updated_at',
+        )
+
+
+class Banner(models.Model):
+    alt_text = models.CharField(
+        verbose_name='Alter Text',
+        null=True,
+        blank=True,
+        max_length=100,
+    )
+    url = models.URLField(verbose_name='Image URL')
+    visible = models.BooleanField(verbose_name='Visible', default=True)
+    created_at = models.DateTimeField(
+        verbose_name='Created At',
+        auto_now_add=True,
+    )
+
+    def __str__(self):
+        return self.url
+
+    class Meta:
+        ordering = (
+            '-created_at',
+        )
+
+
 class PageTypeChoices(models.IntegerChoices):
     PRODUCT_TYPE = 1, '产品页'
     CUSTOM_TYPE = 2, '自定义页'
@@ -20,7 +72,9 @@ class PageTypeChoices(models.IntegerChoices):
 class CustomPage(models.Model):
     title = models.CharField(verbose_name='Title', max_length=200)
     content = models.TextField(verbose_name='Content')
+    raw_content = models.TextField(verbose_name='Raw Content', null=True, blank=True)
     banner_hidden = models.BooleanField(verbose_name='Banner Hidden', default=False)
+    show_in_index = models.BooleanField(verbose_name='Show in homepage', default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
 
@@ -59,6 +113,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='Description', null=True, blank=True)
     spec = models.CharField(verbose_name='Spec', null=True, blank=True, max_length=200)
     visible = models.BooleanField(verbose_name='Visible', default=True)
+    show_in_index = models.BooleanField(verbose_name='Show in homepage', default=False)
     main_img = models.ImageField(
         verbose_name='Main Image',
         upload_to=product_image_path_and_filename,

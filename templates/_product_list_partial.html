@@ -1,0 +1,13 @@
+<div class="p-2 flex flex-col w-1/2">
+    <div class="overflow-hidden shadow-lg lg:w-3/10 lg:h-[500px] lg:mx-1 my-3 pb-5 lg:pb-0">
+        <a href="{% url 'product' p.id %}">
+            <img src="/{{ p.main_img }}" alt="{{ p.title }}" class="w-full h-3/4 object-contain lg:object-cover lg:shadow-lg">
+            <div class="p-3 lg:pt-9">
+                <h3 class="mb-2">{{ p.title }}</h3>
+                <p class="text-red-500">
+                    <span class="">￥{{ p.price }}</span>
+                </p>
+            </div>
+        </a>
+    </div>
+</div>

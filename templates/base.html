@@ -24,7 +24,7 @@
                 <div class="container mx-auto flex items-center justify-between">
                     <!-- Logo or Brand -->
                     <div class="w-28">
-                        <img src="{% static '110.png' %}" alt="LOGO" class="object-contain">
+                        <a href="{% url 'index' %}"><img src="{% static '110.png' %}" alt="LOGO" class="object-contain"></a>
                     </div>
                     <!-- Navigation Links -->
                     <div class="hidden lg:flex justify-end pr-5">
@@ -56,9 +56,9 @@
         <main class="container mx-auto flex-1 flex flex-col">
             {% block main_content %}
                 {% if not hidden_banner %}
-                <div id="swiper" class="w-full lg:h-[480px] overflow-hidden">
-                    <img src="http://image.rechatun.com/testing/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201030132146.jpg" width="100%" height="280px" alt="banner">
-                </div>
+                    {% block banner %}
+                        {% include 'banner.html' %}
+                    {% endblock %}
                 {% endif %}
 
                 <div class="flex lg:flex-row flex-col">

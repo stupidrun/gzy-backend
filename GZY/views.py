@@ -12,14 +12,28 @@ view_dict = {
 }
 
 
+def get_icp_info():
+    return 'ABCDEFGHIJKL'
+
+
+def get_company_name():
+    return 'Haoxuan'
+
+
 def menu_request_context(request: HttpRequest):
     return {
         'menu_list': models.Menu.objects.filter(visible=True).all()[:4],
+        'ICP': get_icp_info(),
+        'company_name': get_company_name(),
+        'banner_list': models.Banner.objects.filter(visible=True)[:5],
+        'categories': models.ProductCategory.objects.distinct().all(),
     }
 
 
 def index(request: HttpRequest):
     return render(request, 'index.html', {
+        'page_list': models.CustomPage.objects.filter(show_in_index=True).all(),
+        'product_list': models.Product.objects.filter(show_in_index=True).all(),
     })
 
 
@@ -41,6 +55,7 @@ def product_list(request: HttpRequest, id: int):
     return render(request, 'product_list.html', {
         'categories': models.ProductCategory.objects.distinct().all(),
         'category': category,
+        'current_category_id': id,
     })
 
 

@@ -12,6 +12,19 @@ class MenuAdmin(admin.ModelAdmin):
     show_facets = admin.ShowFacets.ALWAYS
 
 
+@admin.register(models.Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = (
+        'alt_text',
+        'url',
+        'created_at',
+        'visible',
+    )
+    list_filter = (
+        'visible',
+    )
+
+
 @admin.register(models.ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
     pass

@@ -8,7 +8,15 @@
     <div>
         <ul class="flex flex-wrap justify-start">
             {% for c in categories %}
-                <li class="border m-1"><a href="{% url 'product_list' c.id %}" class="p-2 block bg-gray-100 text-gray-500">{{ c.title }}</a></li>
+                <li class="border m-1">
+                    {% if c.id != current_category_id %}
+                        <a href="{% url 'product_list' c.id %}" class="p-2 block bg-gray-100 text-gray-500">
+                            {{ c.title }}
+                        </a>
+                    {% else %}
+                        <span class="p-2 block bg-red-500 text-white">{{ c.title }}</span>
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
     </div>

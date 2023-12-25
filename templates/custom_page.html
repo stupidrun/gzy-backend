@@ -5,8 +5,5 @@
 {% endblock %}
 
 {% block content %}
-    <div class="p-4">
-        <!-- <p class="text-bold">{{ page.title }}</p> -->
-        {{ page.content | safe | linebreaks }}
-    </div>
+    {% include '_custom_page_partial.html' %}
 {% endblock %}

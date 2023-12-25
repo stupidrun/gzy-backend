@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Hello Django</h1>
-    <ul>
-        {% for m in menu_list %}
-            <li>{{ m }}</li>
+    <div class="w-full">
+        <div class="px-2">
+            {% include '_product_type_list.html' %}
+        </div>
+        <div class="px-7 flex flex-row flex-wrap justify-start">
+            {% for p in product_list%}
+                {% include '_product_list_partial.html' %}
+            {% endfor %}
+        </div>
+
+        {% for page in page_list %}
+            {% include '_custom_page_partial.html' %}
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
