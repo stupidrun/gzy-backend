@@ -12,6 +12,7 @@ def product_detail_image_path_and_filename(instance, filename):
 
 class SiteInfo(models.Model):
     site_name = models.CharField(verbose_name='Site Name', max_length=100)
+    logo_url = models.URLField(verbose_name='LOGO URL', null=True, blank=True)
     mobile = models.CharField(verbose_name='Mobile Number', max_length=20)
     tel = models.CharField(verbose_name='Telephone', null=True, blank=True, max_length=25)
     address = models.CharField(verbose_name='Address', null=True, blank=True, max_length=255)

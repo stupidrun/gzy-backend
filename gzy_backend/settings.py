@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'GZY.apps.GzyConfig',
+    'contact_message.apps.ContactMessageConfig',
 ]
 
 MIDDLEWARE = [

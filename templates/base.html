@@ -24,7 +24,7 @@
                 <div class="container mx-auto flex items-center justify-between">
                     <!-- Logo or Brand -->
                     <div class="w-28">
-                        <a href="{% url 'index' %}"><img src="{% static '110.png' %}" alt="LOGO" class="object-contain"></a>
+                        <a href="{% url 'index' %}"><img src="{{ site_info.logo_url }}" alt="LOGO" class="object-contain"></a>
                     </div>
                     <!-- Navigation Links -->
                     <div class="hidden lg:flex justify-end pr-5">
