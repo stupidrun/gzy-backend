@@ -10,11 +10,41 @@ def product_detail_image_path_and_filename(instance, filename):
     return f'static/upload/{instance.product.title}/details/{get_random_string(length=3)}_{filename}'
 
 
+class SiteInfo(models.Model):
+    site_name = models.CharField(verbose_name='Site Name', max_length=100)
+    mobile = models.CharField(verbose_name='Mobile Number', max_length=20)
+    tel = models.CharField(verbose_name='Telephone', null=True, blank=True, max_length=25)
+    address = models.CharField(verbose_name='Address', null=True, blank=True, max_length=255)
+    agent_name = models.CharField(verbose_name='Agent Name', null=True, blank=True, max_length=50)
+    email = models.EmailField(verbose_name='Email', null=True, blank=True, max_length=100)
+    contact_qrcode = models.URLField(verbose_name='Qrcode for contact', null=True, blank=True)
+    wechat_mp_qrcode = models.URLField(verbose_name='Qrcode for MP', null=True, blank=True)
+    mini_program_qrcode = models.URLField(verbose_name='Qrcode for MiniProgram', null=True, blank=True)
+    visible = models.BooleanField(verbose_name='Visible', default=False)
+
+    def __str__(self):
+        return f'{self.site_name}-{self.mobile}'
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        if self.visible is True:
+            self.__class__.objects.filter(visible=True).update(visible=False)
+        return super().save(force_insert, force_update, using, update_fields)
+
+    class Meta:
+        verbose_name_plural = verbose_name = 'Site Information'
+
+
 class ArticleCategory(models.Model):
     title = models.CharField(verbose_name='Title', max_length=200)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = 'Article Categories'
+        verbose_name = 'Article Category'
 
 
 class Article(models.Model):
@@ -26,6 +56,7 @@ class Article(models.Model):
     title = models.CharField(verbose_name='Title', max_length=200)
     content = models.TextField(verbose_name='Content')
     visible = models.BooleanField(verbose_name='Visible', default=True)
+    recommend = models.BooleanField(verbose_name='Recommend', default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
 

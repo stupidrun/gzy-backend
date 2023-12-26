@@ -1,0 +1,35 @@
+<div class="text-sm lg:mt-2 px-1">
+    <div class="invisible lg:visible text-sm lg:text-md text-gray-500 w-full p-2 border-l">联系方式</div>
+    <div class="flex flex-row flex-wrap text-gray-800 pt-2">
+        <div class="w-[100px] h-[100px] lg:w-[180px] lg:h-[180px] bg-gray-500 lg:mx-auto">
+            <img src="{{ site_info.contact_qrcode }}" alt="QRCODE">
+        </div>
+        <div class="flex-1 pl-2 lg:px-6 lg:mt-2">
+            <p>手机：{{ site_info.mobile }} {{ site_info.agent_name }}</p>
+            {% if site_info.tel %}
+                <p>固话：{{ site_info.tel }}</p>
+            {% endif %}
+            {% if site_info.email %}
+                <p>邮箱：{{ site_info.email }}</p>
+            {% endif %}
+            {% if site_info.address%}
+                <p>地址：{{ site_info.address }}</p>
+            {% endif %}
+        </div>
+        <div class="hidden lg:block text-sm lg:mt-2 px-5 lg:px-1 lg:mx-auto lg:flex lg:flex-col gap-4">
+            <hr>
+            {% if site_info.wechat_mp_qrcode %}
+                <span class="text-center">官方微信公众号</span>
+                <div class="invisible lg:visible w-[100px] h-[100px] lg:w-[180px] lg:h-[180px] bg-gray-500 lg:mx-auto">
+                    <img src="{{ site_info.wechat_mp_qrcode }}" alt="wechat_mp_qrcode">
+                </div>
+            {% endif %}
+            {% if site_info.mini_program_qrcode %}
+                <span class="text-center">官方微信小程序</span>
+                <div class="invisible lg:visible w-[100px] h-[100px] lg:w-[180px] lg:h-[180px] bg-gray-500 lg:mx-auto">
+                    <img src="{{ site_info.mini_program_qrcode }}" alt="mini_program_qrcode">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

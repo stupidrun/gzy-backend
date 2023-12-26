@@ -2,3 +2,5 @@
 .DS_Store
 */__pycacache__
 */__py_cacache__
+*/migrations
+.env

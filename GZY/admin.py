@@ -25,6 +25,44 @@ class BannerAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(models.SiteInfo)
+class SiteInfoAdmin(admin.ModelAdmin):
+    list_display = (
+        'site_name',
+        'mobile',
+        'tel',
+        'address',
+        'email',
+        'visible',
+    )
+    list_filter = (
+        'visible',
+    )
+
+@admin.register(models.ArticleCategory)
+class ArticleCategoryAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'category',
+        'visible',
+        'recommend',
+        'created_at',
+    )
+    list_filter = (
+        'category',
+        'visible',
+    )
+    list_editable = (
+        'visible',
+        'recommend',
+    )
+
+
 @admin.register(models.ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
     pass
@@ -37,7 +75,21 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(models.CustomPage)
 class CustomPageAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'title',
+        'banner_hidden',
+        'show_in_index',
+        'created_at',
+        'updated_at',
+    )
+    list_filter = (
+        'banner_hidden',
+        'show_in_index',
+    )
+    list_editable = (
+        'banner_hidden',
+        'show_in_index',
+    )
 
 
 @admin.register(models.ProductDetailImage)

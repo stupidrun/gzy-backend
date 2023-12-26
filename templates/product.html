@@ -4,7 +4,7 @@
     - {{ product.title }}
 {% endblock %}
 
-{% block main_content %}
+{% block content %}
     <div class="flex flex-col lg:mx-auto">
         <div class="p-4 w-full shadow-lg lg:shadow-none">
             <p class="">
@@ -19,7 +19,7 @@
         <div class="mx-auto mt-5 p-5 w-full h-200 bg-gray-100">
             {{ product.description | safe | linebreaks }}
         </div>
-        <ul class="lg:flex lg:flex-col p-3">
+        <ul class="lg:flex lg:flex-col p-0">
             {% for image in product.get_all_detail_images %}
                 <li class="shadow-lg my-5">
                     <img src="/{{ image.image }}" alt="{{ product.title }}" class="w-full object-cover">

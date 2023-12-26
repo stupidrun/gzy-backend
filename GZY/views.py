@@ -27,13 +27,15 @@ def menu_request_context(request: HttpRequest):
         'company_name': get_company_name(),
         'banner_list': models.Banner.objects.filter(visible=True)[:5],
         'categories': models.ProductCategory.objects.distinct().all(),
+        'site_info': models.SiteInfo.objects.filter(visible=True).first(),
     }
 
 
 def index(request: HttpRequest):
     return render(request, 'index.html', {
         'page_list': models.CustomPage.objects.filter(show_in_index=True).all(),
-        'product_list': models.Product.objects.filter(show_in_index=True).all(),
+        'product_list': models.Product.objects.filter(show_in_index=True, visible=True).all(),
+        'article_list': models.Article.objects.filter(visible=True, recommend=True).all()[:7],
     })
 
 
@@ -46,8 +48,17 @@ def menu(request: HttpRequest, id: int):
     return redirect(reverse(v, kwargs={'id': target_id}))
 
 
-def article(request: HttpRequest, id: int):
-    return HttpResponse('article')
+def article(request: HttpRequest, id: int, show_categories=True):
+    if show_categories:
+        categories = models.ArticleCategory.objects.all()
+    else:
+        categories = []
+    a = models.Article.objects.filter(pk=id).first()
+    return render(request, 'article.html', {
+        'article_categories': categories,
+        'article': a,
+        'recently': models.Article.objects.exclude(pk=id).filter(visible=True)[:2],
+    })
 
 
 def product_list(request: HttpRequest, id: int):
@@ -56,6 +67,7 @@ def product_list(request: HttpRequest, id: int):
         'categories': models.ProductCategory.objects.distinct().all(),
         'category': category,
         'current_category_id': id,
+        'article_list': models.Article.objects.filter(visible=True).all()[:7],
     })
 
 

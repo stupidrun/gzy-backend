@@ -1,13 +1,11 @@
-<div class="p-2 flex flex-col w-1/2">
-    <div class="overflow-hidden shadow-lg lg:w-3/10 lg:h-[500px] lg:mx-1 my-3 pb-5 lg:pb-0">
-        <a href="{% url 'product' p.id %}">
-            <img src="/{{ p.main_img }}" alt="{{ p.title }}" class="w-full h-3/4 object-contain lg:object-cover lg:shadow-lg">
-            <div class="p-3 lg:pt-9">
-                <h3 class="mb-2">{{ p.title }}</h3>
-                <p class="text-red-500">
-                    <span class="">￥{{ p.price }}</span>
-                </p>
-            </div>
-        </a>
-    </div>
+<div class="flex flex-col mt-2 w-1/2 h-[250px] lg:w-[400px] lg:h-[400px] shadow-md lg:shadow-none">
+    <a href="{% url 'product' p.id %}" class="block">
+        <img src="/{{ p.main_img }}" alt="{{ p.title }}" class="w-full h-[180px] lg:h-[330px] object-cover lg:object-cover lg:shadow-lg">
+        <div class="h-[130px] p-3 lg:pt-9">
+            <h3 class="mb-2 text-sm">{{ p.title | truncatechars:10 }}</h3>
+            <p class="text-red-500">
+                <span class="">￥{{ p.price }}</span>
+            </p>
+        </div>
+    </a>
 </div>

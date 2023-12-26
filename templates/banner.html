@@ -1,5 +1,5 @@
-<div id="swiper" class="w-full lg:h-[480px] overflow-hidden">
+<div id="swiper" class="w-full h-[200px] lg:h-[380px] overflow-hidden">
     {% for banner in banner_list %}
-        <img src="{{ banner.url }}" width="100%" height="280px" alt="{{ banner.alt_text }}">
+        <img src="{{ banner.url }}" alt="{{ banner.alt_text }}" class="w-full object-cover">
     {% endfor %}
 </div>

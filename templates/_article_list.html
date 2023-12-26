@@ -1,0 +1,18 @@
+<div class="flex">
+    <div class="lg:hidden">
+        {% for c in article_categories %}
+            <p>{{ c.title }}</p>
+        {% endfor %}
+    </div>
+    <div class="flex flex-col lg:w-full">
+        <div class="text-sm text-gray-500 w-full p-2 border-l">文章中心</div>
+        {% for a in article_list %}
+            <div>
+                <a href="{% url 'article' a.id %}" class="block w-full flex flex-col p-2 my-2 lg:ml-5 hover:border-b hover:ml-3">
+                    <span class="block font-bold">{{ a.title | truncatechars:12 }}</span>
+                    <span class="block text-xs text-gray-500">{{ a.created_at | date:'Y-m-d' }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
