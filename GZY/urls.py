@@ -4,7 +4,7 @@ from . import views, models
 
 
 urlpatterns = [
-    path('index/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('menu/<int:id>/', views.menu, name='menu'),
     path('article/<int:id>/', views.article, name='article'),
     path('custom_page/<int:id>/', views.custom_page, name='custom_page'),
