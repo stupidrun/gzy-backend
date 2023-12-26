@@ -1,6 +1,5 @@
 .idea
 .DS_Store
-*/__pycacache__
-*/__py_cacache__
+*/__pycache__
 */migrations
 .env
