@@ -2,12 +2,12 @@
     {% for c in categories %}
         <li class="border lg:border-none m-1 lg:w-full">
             {% if current_category_id != c.id %}
-                <a href="{% url 'product_list' c.id %}" class="p-2 block bg-gray-100 text-gray-500 lg:bg-white lg:border-b lg:pl-8">
+                <a href="{% url 'product_list' c.id %}" class="p-2 block lg:w-[95%] bg-gray-100 text-gray-500 lg:bg-white lg:pl-8">
                     {{ c.title }}
                 </a>
             {% else %}
-                <span class="p-2 block bg-gray-100 text-gray-500 lg:bg-white lg:border-b lg:pl-8 lg:text-red-500">
-                    {{ c.title }}
+                <span class="p-2 block bg-gray-100 text-gray-500 lg:bg-white lg:ml-8 lg:text-red-500">
+                    ▲{{ c.title }}
                 </span>
             {% endif %}
         </li>

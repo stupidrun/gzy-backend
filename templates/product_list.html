@@ -22,20 +22,10 @@
     </div>
     <div class="p-2 flex flex-col">
         <p class="text-bold text-center py-3">{{ category.title }}</p>
-        <ul class="flex flex-row justify-around flex-wrap">
+        <div class="w-[95%] lg:w-[99%] lg:gap-3 mx-auto mt-3 flex flex-row flex-wrap justify-start lg:mb-20">
             {% for p in category.get_visible_products %}
-                <li class="overflow-hidden shadow-lg lg:w-3/10 lg:h-[500px] lg:mx-1 my-3">
-                    <a href="{% url 'product' p.id %}">
-                        <img src="{{ p.get_styled_main_image }}" alt="{{ p.title }}" class="w-full h-3/4 object-contain lg:shadow-lg">
-                        <div class="p-3 lg:pt-10">
-                            <h3 class="mb-2">{{ p.title }}</h3>
-                            <p class="text-red-500">
-                                <span class="">￥{{ p.price }}</span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
+                {% include '_product_list_partial.html' %}
             {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endblock %}
