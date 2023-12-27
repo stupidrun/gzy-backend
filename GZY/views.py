@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse, Http404
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse
+from django.conf import settings
 from . import models
 
 
@@ -28,6 +28,7 @@ def menu_request_context(request: HttpRequest):
         'banner_list': models.Banner.objects.filter(visible=True)[:5],
         'categories': models.ProductCategory.objects.distinct().all(),
         'site_info': models.SiteInfo.objects.filter(visible=True).first(),
+        'qiniu_style_path': settings.QINIU_IMAGE_STYLE,
     }
 
 

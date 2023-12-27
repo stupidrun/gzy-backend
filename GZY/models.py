@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils.crypto import get_random_string
+from django.conf import settings
 
 
 def product_image_path_and_filename(instance, filename):
-    return f'static/upload/{instance.title or "general"}/{get_random_string(length=3)}_{filename}'
+    return f'{instance.title or "general"}/{get_random_string(length=3)}_{filename}'
 
 
 def product_detail_image_path_and_filename(instance, filename):
-    return f'static/upload/{instance.product.title}/details/{get_random_string(length=3)}_{filename}'
+    return f'{instance.product.title}/details/{get_random_string(length=3)}_{filename}'
 
 
 class SiteInfo(models.Model):
@@ -163,6 +164,12 @@ class Product(models.Model):
     def get_all_detail_images(self):
         return self.detail_images.filter(visible=True).all()
 
+    def get_styled_main_image(self):
+        try:
+            return f'{self.main_img.url}{settings.QINIU_IMAGE_STYLE}'
+        except:
+            return ''
+
 
 class ProductDetailImage(models.Model):
     product = models.ForeignKey(
@@ -181,6 +188,13 @@ class ProductDetailImage(models.Model):
 
     def __str__(self):
         return f'{self.product.title} - {self.index}'
+
+    @property
+    def url(self):
+        try:
+            return f'{self.image.url}{settings.QINIU_IMAGE_STYLE}'
+        except:
+            return ''
 
     class Meta:
         ordering = (

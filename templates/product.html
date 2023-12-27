@@ -8,7 +8,7 @@
     <div class="flex flex-col lg:mx-auto">
         <div class="p-4 w-full shadow-lg lg:shadow-none">
             <p class="">
-                <img src="/{{ product.main_img }}" class="lg:flex-2 lg:object-contain">
+                <img src="{{ product.get_styled_main_image }}" class="lg:flex-2 lg:object-contain">
             </p>
             <div class="lg:w-full lg:mx-3 lg:text-lg">
                 <p class="font-bold p-1 lg:w-full">{{ product.title }}</p>
@@ -22,7 +22,7 @@
         <ul class="lg:flex lg:flex-col p-0">
             {% for image in product.get_all_detail_images %}
                 <li class="shadow-lg my-5">
-                    <img src="/{{ image.image }}" alt="{{ product.title }}" class="w-full object-cover">
+                    <img src="{{ image.url }}" alt="{{ product.title }}" class="w-full object-cover">
                 </li>
             {% endfor %}
         </ul>

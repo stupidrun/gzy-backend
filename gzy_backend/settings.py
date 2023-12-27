@@ -141,7 +141,17 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+MEDIA_ROOT = '/ganzhiyi/'
+
+QINIU_ACCESS_KEY = 'l6GkkK5MNx3xFcC_19FL95Wv4741roPXQjsxvQTe'
+QINIU_SECRET_KEY = 'kp-YfwEM2BKrQnbgC8u3ZT6M49HA1D99BfKUUAlu'
+QINIU_BUCKET_NAME = 'haoxuan-erp'
+QINIU_BUCKET_DOMAIN = 'image.rechatun.com'
+QINIU_SECURE_URL = True
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+QINIU_IMAGE_STYLE = '?	imageMogr2/auto-orient/thumbnail/800x/format/jpg/blur/1x0/quality/65|imageslim'

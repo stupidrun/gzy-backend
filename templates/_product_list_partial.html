@@ -1,6 +1,6 @@
 <div class="flex flex-col mt-2 w-1/2 h-[250px] lg:w-[400px] lg:h-[400px] shadow-md lg:shadow-none">
     <a href="{% url 'product' p.id %}" class="block">
-        <img src="/{{ p.main_img }}" alt="{{ p.title }}" class="w-full h-[180px] lg:h-[330px] object-cover lg:object-cover lg:shadow-lg">
+        <img src="{{ p.get_styled_main_image }}" alt="{{ p.title }}" class="w-[95%] mx-auto h-[180px] lg:h-[330px] object-cover lg:object-cover lg:shadow-lg">
         <div class="h-[130px] p-3 lg:pt-9">
             <h3 class="mb-2 text-sm">{{ p.title | truncatechars:10 }}</h3>
             <p class="text-red-500">
