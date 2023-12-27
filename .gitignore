@@ -4,3 +4,4 @@
 */migrations
 .env
 static/*
+.qiniu_pythonsdk_hostscache.json
