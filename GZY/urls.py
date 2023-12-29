@@ -15,4 +15,5 @@ urlpatterns = [
         pk_url_kwarg='id',
     ), name='product'),
     path('product_list/<int:id>/', views.product_list, name='product_list'),
+    path('product_list/', views.product_list, name='product_list'),
 ]

@@ -62,13 +62,13 @@ def article(request: HttpRequest, id: int, show_categories=True):
     })
 
 
-def product_list(request: HttpRequest, id: int):
-    category = get_object_or_404(models.ProductCategory, pk=id)
+def product_list(request: HttpRequest, id: int = 0):
+    product_queryset = models.Product.objects.filter(visible=True)
     return render(request, 'product_list.html', {
         'categories': models.ProductCategory.objects.distinct().all(),
-        'category': category,
+        'products': product_queryset.filter(category_id=id).all() if id != 0 else product_queryset.all(),
         'current_category_id': id,
-        'article_list': models.Article.objects.filter(visible=True).all()[:7],
+        'current_category': None if id == 0 else models.ProductCategory.objects.filter(pk=id).first(),
     })
 
 

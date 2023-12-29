@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 
 {% block title_extra %}
-    - {{ category.title }}
+    {% if current_category %}
+        - {{ current_category.title }}
+    {% else %}
+        - 全部分类
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="lg:hidden">
-        <ul class="flex flex-wrap justify-start">
+        <ul class="px-2 flex flex-wrap justify-start">
+            <li class="border m-1">
+                {% if current_category_id != 0 %}
+                    <a href="{% url 'product_list' %}" class="p-2 block bg-gray-100 text-gray-500">
+                        全部
+                    </a>
+                {% else %}
+                    <span class="p-2 block bg-red-500 text-white">全部</span>
+                {% endif %}
+            </li>
             {% for c in categories %}
                 <li class="border m-1">
                     {% if c.id != current_category_id %}
@@ -20,12 +33,9 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="p-2 flex flex-col">
-        <p class="text-bold text-center py-3">{{ category.title }}</p>
-        <div class="w-[95%] lg:w-[99%] lg:gap-3 mx-auto mt-3 flex flex-row flex-wrap justify-start lg:mb-20">
-            {% for p in category.get_visible_products %}
-                {% include '_product_list_partial.html' %}
-            {% endfor %}
-        </div>
+    <div class="w-[95%] lg:w-[99%] lg:gap-3 mx-auto mt-3 flex flex-row flex-wrap justify-start lg:mb-20">
+        {% for p in products %}
+            {% include '_product_list_partial.html' %}
+        {% endfor %}
     </div>
 {% endblock %}

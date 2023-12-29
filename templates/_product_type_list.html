@@ -1,4 +1,13 @@
 <ul class="flex flex-wrap justify-start lg:flex-col lg:w-full">
+    <li class="border lg:border-none m-1 lg:w-full">
+        {% if current_category_id != 0 %}
+            <a href="{% url 'product_list' %}" class="p-2 block lg:w-[95%] bg-gray-100 text-gray-500 lg:bg-white lg:pl-8">
+                全部
+            </a>
+        {% else %}
+            <span class="p-2 block bg-gray-100 text-gray-500 lg:bg-white lg:ml-8 lg:text-red-500">▲全部</span>
+        {% endif %}
+    </li>
     {% for c in categories %}
         <li class="border lg:border-none m-1 lg:w-full">
             {% if current_category_id != c.id %}
