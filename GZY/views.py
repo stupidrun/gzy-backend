@@ -13,11 +13,11 @@ view_dict = {
 
 
 def get_icp_info():
-    return 'ABCDEFGHIJKL'
+    return '粤ICP备2023096982号'
 
 
 def get_company_name():
-    return 'Haoxuan'
+    return '浩轩茶业'
 
 
 def menu_request_context(request: HttpRequest):
