@@ -17,7 +17,7 @@ def get_icp_info():
 
 
 def get_company_name():
-    return '浩轩茶业'
+    return '江门市新会区浩轩茶业有限公司'
 
 
 def menu_request_context(request: HttpRequest):
