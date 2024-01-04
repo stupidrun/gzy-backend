@@ -104,10 +104,14 @@ class PageTypeChoices(models.IntegerChoices):
 
 class CustomPage(models.Model):
     title = models.CharField(verbose_name='Title', max_length=200)
+    header_image = models.ImageField(verbose_name='Header Image', null=True, blank=True)
+    footer_image = models.ImageField(verbose_name='Footer Image', null=True, blank=True)
     content = models.TextField(verbose_name='Content')
     raw_content = models.TextField(verbose_name='Raw Content', null=True, blank=True)
     banner_hidden = models.BooleanField(verbose_name='Banner Hidden', default=False)
     show_in_index = models.BooleanField(verbose_name='Show in homepage', default=False)
+    show_in_mini_app = models.BooleanField(verbose_name='Show in mini app', default=False)
+    is_about_us = models.BooleanField(verbose_name='Is About Us', default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
 
@@ -163,6 +167,9 @@ class Product(models.Model):
 
     def get_all_detail_images(self):
         return self.detail_images.filter(visible=True).all()
+
+    def get_all_detail_image_urls(self):
+        return [v.url for v in self.detail_images.filter(visible=True).all()]
 
     def get_styled_main_image(self):
         try:
