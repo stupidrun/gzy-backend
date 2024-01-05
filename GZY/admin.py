@@ -12,6 +12,24 @@ class MenuAdmin(admin.ModelAdmin):
     show_facets = admin.ShowFacets.ALWAYS
 
 
+@admin.register(models.Segment)
+class SegmentAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'image',
+        'visible',
+        'power',
+        'created_at',
+    )
+    list_editable = (
+        'visible',
+        'power',
+    )
+    list_filter = (
+        'visible',
+    )
+
+
 @admin.register(models.Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = (

@@ -24,6 +24,10 @@ class SiteInfo(models.Model):
     mini_program_qrcode = models.URLField(verbose_name='Qrcode for MiniProgram', null=True, blank=True)
     visible = models.BooleanField(verbose_name='Visible', default=False)
 
+    @classmethod
+    def get_enabled_one(cls):
+        return cls.objects.filter(visible=True).first()
+
     def __str__(self):
         return f'{self.site_name}-{self.mobile}'
 
@@ -253,3 +257,21 @@ class Menu(models.Model):
             return self.product_id
         elif self.page_type == PageTypeChoices.PRODUCT_LIST_TYPE:
             return self.product_category_id
+
+
+class Segment(models.Model):
+    title = models.CharField(verbose_name='Title', max_length=10)
+    image = models.ImageField(verbose_name='image', null=True, blank=True)
+    content = models.TextField(verbose_name='Content')
+    visible = models.BooleanField(verbose_name='Visible', default=True)
+    power = models.PositiveSmallIntegerField(verbose_name='Power of sort', default=10)
+    created_at = models.DateTimeField(verbose_name='', auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = (
+            '-power',
+            '-created_at',
+        )

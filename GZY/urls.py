@@ -10,6 +10,7 @@ api_router.register('custom_page_home', api_views.CustomPageViewSets)
 api_router.register('menu', api_views.MenuViewSets)
 api_router.register('product', api_views.ProductViewSets)
 api_router.register('article', api_views.ArticleViewSets)
+api_router.register('segment', api_views.SegmentViewSets)
 
 
 urlpatterns = [
@@ -29,5 +30,6 @@ urlpatterns = [
     # api views
     # path('api/v1/product/<int:product_id>/images/', api_views.product_detail_images),
     path('api/v1/about_us_page/', api_views.about_us_page),
+    path('api/v1/site_info/', api_views.site_info),
     path('api/v1/', include(api_router.urls)),
 ]

@@ -3,7 +3,6 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.shortcuts import get_object_or_404
 from . import models
 
 
@@ -11,6 +10,25 @@ class BannerSerializer(serializers.Serializer):
     url = serializers.URLField(read_only=True)
     alt_text = serializers.CharField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
+
+
+class SegmentModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Segment
+        exclude = (
+            'visible',
+            'power',
+        )
+        depth = 1
+
+
+class SiteInfoModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SiteInfo
+        exclude = (
+            'visible',
+        )
+        depth = 1
 
 
 class CustomPageSerializer(serializers.Serializer):
@@ -83,6 +101,11 @@ class CustomPageViewSets(ReadOnlyModelViewSet):
     queryset = models.CustomPage.objects.filter(show_in_mini_app=True, is_about_us=False)[:3]
 
 
+class SegmentViewSets(ReadOnlyModelViewSet):
+    serializer_class = SegmentModelSerializer
+    queryset = models.Segment.objects.filter(visible=True)[:3]
+
+
 @api_view(['GET'])
 def about_us_page(request: Request) -> Response:
     return Response(
@@ -90,8 +113,8 @@ def about_us_page(request: Request) -> Response:
     )
 
 
-# @api_view(['GET'])
-# def product_detail_images(request: Request, product_id) -> Response:
-#     p: models.Product = get_object_or_404(models.Product.objects.filter(visible=True), pk=product_id)
-#     return Response([img.url for img in p.get_all_detail_images()])
-
+@api_view(['GET'])
+def site_info(request: Request) -> Response:
+    return Response(
+        SiteInfoModelSerializer(models.SiteInfo.get_enabled_one()).data,
+    )
