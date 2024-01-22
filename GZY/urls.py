@@ -1,6 +1,7 @@
 from django.urls import path, include
 from django.views.generic import DetailView
 from . import views, models, api_views
+from contact_message import api_views as message_api
 from rest_framework.routers import DefaultRouter
 
 
@@ -32,4 +33,7 @@ urlpatterns = [
     path('api/v1/about_us_page/', api_views.about_us_page),
     path('api/v1/site_info/', api_views.site_info),
     path('api/v1/', include(api_router.urls)),
+
+    # Message API View
+    path('api/v1/message/', message_api.CreateMessageView.as_view()),
 ]

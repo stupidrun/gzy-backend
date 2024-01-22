@@ -5,7 +5,7 @@ from django.db import models
 
 class Message(models.Model):
     phone = models.CharField(verbose_name='Phone', max_length=20)
-    name = models.CharField(verbose_name='Name', max_length=50)
+    name = models.CharField(verbose_name='Name', max_length=50, null=True, blank=True)
     content = models.TextField(verbose_name='Content', null=True, blank=True)
     followed = models.BooleanField(verbose_name='Followed', default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
