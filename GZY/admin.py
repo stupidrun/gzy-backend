@@ -125,4 +125,5 @@ class ProductImageAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'visible',
+        'product',
     )
