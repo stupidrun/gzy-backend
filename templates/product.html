@@ -21,7 +21,7 @@
         </div>
         <ul class="lg:flex lg:flex-col p-0">
             {% for image in product.get_all_detail_images %}
-                <li class="shadow-lg my-5">
+                <li class="my-0">
                     <img src="{{ image.url }}" alt="{{ product.title }}" class="w-full object-cover">
                 </li>
             {% endfor %}
