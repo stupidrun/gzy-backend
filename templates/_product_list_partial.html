@@ -2,7 +2,7 @@
     <a href="{% url 'product' p.id %}" class="block">
         <img src="{{ p.get_styled_main_image }}" alt="{{ p.title }}" class="w-[95%] mx-auto h-[180px] lg:h-[330px] object-cover lg:object-cover lg:shadow-lg">
         <div class="h-[130px] p-3 lg:pt-7">
-            <h3 class="mb-2 text-sm">{{ p.title | truncatechars:10 }}</h3>
+            <h3 class="mb-2 text-sm text-wrap">{{ p.title }}</h3>
             {% comment %} <p class="text-red-500">
                 <span class="">￥{{ p.price }}</span>
             </p> {% endcomment %}
