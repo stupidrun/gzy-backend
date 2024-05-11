@@ -7,11 +7,12 @@
 {% block content %}
     <div class="flex flex-col lg:mx-auto lg:max-w-screen-md">
         <div class="p-4 w-full shadow-lg lg:shadow-none">
+            <p class="font-bold p-1 lg:w-full">{{ product.title }}</p>
             <p class="">
                 <img src="{{ product.get_styled_main_image }}" class="lg:flex-2 lg:object-contain">
             </p>
             <div class="lg:w-full lg:mx-3 lg:text-lg">
-                <p class="font-bold p-1 lg:w-full">{{ product.title }}</p>
+                {% comment %} <p class="font-bold p-1 lg:w-full">{{ product.title }}</p> {% endcomment %}
                 <p class="text-gray-500 text-xs pl-1">{{ product.spec }}</p>
                 {% comment %} <p class="text-red-500 font-bold mt-1">￥{{ product.price }}</p> {% endcomment %}
             </div>
